@@ -4,7 +4,7 @@
 
 ## :two: 웹의 이해
 
-### :notebook: 웹
+## :notebook: 웹
 
 ### 웹이란?
 - 인터넷: 국제적인 광범위한 연결망.
@@ -26,7 +26,7 @@
 
 ---
 
-### :notebook: 프론트엔드
+## :notebook: 프론트엔드
 
 ### HTML vs CSS vs Javascript
 
@@ -73,7 +73,7 @@
     - tag로 찾기 : document.getElementsByTagName('태그명')
 
 ---
-### :notebook: 백엔드
+## :notebook: 백엔드
 
 ### 백엔드의 구조
 
@@ -111,7 +111,7 @@
 
 ## :three: 백엔드의 기초
 
-### :notebook: API
+## :notebook: API
 
 ### API 
 
@@ -138,7 +138,7 @@
 
 ---
 
-### :notebook: Node.js
+## :notebook: Node.js
 
 - javascript를 웹 브라우저 밖에서도 구동할 수 있는 환경을 만들어주는 런타임 플랫폼.
 - React, Vue 등등 프론트엔드 프레임워크가 Node 기반으로 제작됨.
@@ -154,7 +154,7 @@
 
 ---
 
-### :notebook: http와 express
+## :notebook: http와 express
 
 둘 다 웹 서버 운영을 담당하는 서버 모듈이다.
 
@@ -169,7 +169,7 @@
 
 ---
 
-### :notebook: Express: GET
+## :notebook: Express: GET
 
 - GET : 데이터 찾기를 담당하는 메소드.
 
@@ -211,7 +211,7 @@
 
 ---
 
-### :notebook: Express: POST
+## :notebook: Express: POST
 
 - POST : 새로운 데이터 등록 및 생성을 담당하는 메소드.
 - post를 사용하면 서버와 클라이언트는 해당 데이터를 body에 숨겨서 주고 받게 된다. 
