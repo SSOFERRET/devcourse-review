@@ -107,6 +107,12 @@
     - 데이터 수정 : UPDATE
     - 데이터 삭제 : DELETE
 
+---
+
+## :three: 백엔드의 기초
+
+### :notebook: API
+
 #### API 
 
 - Application Programming Interface
@@ -119,10 +125,67 @@
     - head : 통신상태(HTTP code), 응답 형태
     - body : 데이터 전달 요청, 데이터 전달
     - URL : Uniform Resource Locator
-        인터넷상에서 웹페이지 위치를 알려주는 데이터 연산을 서버에게 요청하는 방법.
+        인터넷상에서 웹페이지 위치를 알려주는 데이터 연산을 서버에게 요청하는 방법. method 키워드는 HTTP method로 별개로 입력해준다.
+
+- HTTP method : HTTP에 담을 수 있는 method(목적)
+    - 조회 = GET
+    - 생성 = POST
+    - 수정 = PUT/PATCH 
+    - 삭제 = DELETE    
+
+    cf. patch: 값이 바뀐것만 부분 수정
+        put : 값이 있든 없든 덮어쓰기
 
 ---
 
+### :notebook: Node.js
+
+- javascript를 웹 브라우저 밖에서도 구동할 수 있는 환경을 만들어주는 런타임 플랫폼.
+- React, Vue 등등 프론트엔드 프레임워크가 Node 기반으로 제작됨.
+
+- 특징 :
+    - 싱글스레드: 스레드 1개로 동작한다.
+    - 이벤트 기반: 호출된 일만 실행한다.
+    - 논블로킹 I/O : 스레드 1개가 일을 순차적으로 하는게 아니라, 중간중간 비는 시간에 다른 일을 한다. 비동기적.
+
+- npm : Node.js를 설치하면 자동으로 설치되는, 외부 모듈을 가지고 와 내 프로젝트에 설치할 수 있도록 도와주는 역할을 해주는 프로그램.
+
+- packge.json/ package-lock.json : npm이 가지고 온 외부 모듈의 목록을 보여주는 파일. 
+
+### :notebook: http와 express
+
+둘 다 웹 서버 운영을 담당하는 서버 모듈이다.
+
+- http : node.js 기본 내장 모듈
+- express : 외부 모듈. http를 보다 간결한 코드로 제어하게 도와준다.
+
+#### json
+
+- javascript object notation
+- 한 객체가 가지고 있는 데이터 덩어리. 효율적인 데이터 통신을 위해 사용.
+- json 안 하나의 데이터는 key값과 value값의 쌍으로 이루어져있다.
+
+### :notebook: Express
+
+#### url 구조
+
+- express.get으로 조회하고자 하는 정보는 url로 주고 받는다.
+- req.params : url로 받은 object 정보를 QueryString으로 보여준다.
+
+#### 비구조화
+
+- 배열이나 객체의 속성을 해체하여 그 값을 개별 변수에 담을 수 있게 하는 자바스크립트 표현식.
+
+#### Query
+
+- 파일의 내용 등을 알기 위해 몇개의 code나 key를 기초로 질의하는 것.
+
+#### 네이밍 케이스
+
+- kebab-case : HTML 태그의 id,  class 속성 등에 사용.
+- PascalCase : class명 등에 사용.
+- snake_case : 리소스 파일, 레이아웃 파일 이름 등에 사용.
+- camelCase : 메소드와 변수 이름에 사용.
 
 
 
