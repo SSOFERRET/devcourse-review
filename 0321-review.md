@@ -41,7 +41,7 @@ obj2.set(1, 'a');
 obj2.set(2, 'b');
 obj2.set(3, 'c');
 
-obj2.forEach((v, k, o) => {
+obj2.map((v, k, o) => {
     console.log(`v: ${v}`);
     console.log(`k: ${k}`);
     console.log(`o: ${o}`);
