@@ -1,11 +1,14 @@
 # 03/25 배운 내용 정리
 
 ## :one: 빈 객체 확인하는 방법 3가지
+
 1. 객체.keys() ← BEST!
 2. for
 3. lodash 모듈 : isEmpty
 
+
 Object.keys()는 object의 keys를 배열로 반환한다.
+
 
 ```
 const str1 = "one";
@@ -20,6 +23,7 @@ const isEmpty =(obj)=> {
 console.log(isEmpty(str1)); // false
 console.log(isEmpty(str2)); // true
 ```
+
 
 ## :two: 라우트
 
