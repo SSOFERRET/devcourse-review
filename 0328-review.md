@@ -153,3 +153,89 @@ MariaDB [board]> select * from post;
 +----+-----------+-----------+---------------------+--------+
 4 rows in set (0.000 sec)
 ```
+
+---
+
+## :five: 테이블에 칼럼 추가
+
+```
+MariaDB [board]> alter table post
+    -> add column updated_at datetime
+    -> default now()
+    -> on update now();
+Query OK, 0 rows affected (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [board]> desc post
+    -> ;
++------------+---------------+------+-----+---------------------+-------------------------------+
+| Field      | Type          | Null | Key | Default             | Extra                         |
++------------+---------------+------+-----+---------------------+-------------------------------+
+| id         | int(11)       | NO   | PRI | NULL                | auto_increment                |
+| title      | varchar(100)  | NO   |     | NULL                |                               |
+| subscribe  | varchar(2000) | NO   |     | NULL                |                               |
+| created_at | timestamp     | YES  |     | current_timestamp() |                               |
+| userId     | int(11)       | NO   |     | NULL                |                               |
+| updated_at | datetime      | YES  |     | current_timestamp() | on update current_timestamp() |
++------------+---------------+------+-----+---------------------+-------------------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [board]> update post
+    -> set subscribe="맴맴맴"
+    -> where id=2;
+Query OK, 1 row affected (0.009 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [board]> select * from post;
++----+-----------+-----------+---------------------+--------+---------------------+
+| id | title     | subscribe | created_at          | userId | updated_at          |
++----+-----------+-----------+---------------------+--------+---------------------+
+|  1 | 졸리다    | 냥냥냥    | 2024-03-28 07:55:19 |      1 | 2024-03-28 08:01:49 |
+|  2 | 잠온다    | 맴맴맴    | 2024-03-28 07:55:37 |      2 | 2024-03-28 08:03:31 |
+|  3 | 피곤타    | 꿀꿀꿀    | 2024-03-28 07:55:48 |      3 | 2024-03-28 08:01:49 |
+|  4 | 피곤타    | 왱왱왱    | 2024-03-28 07:55:56 |      1 | 2024-03-28 08:01:49 |
++----+-----------+-----------+---------------------+--------+---------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [board]> insert into post (title, subscribe, userId) values("잠온다", "곽곽곽", 2);
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [board]> select * from post;
++----+-----------+-----------+---------------------+--------+---------------------+
+| id | title     | subscribe | created_at          | userId | updated_at          |
++----+-----------+-----------+---------------------+--------+---------------------+
+|  1 | 졸리다    | 냥냥냥    | 2024-03-28 07:55:19 |      1 | 2024-03-28 08:01:49 |
+|  2 | 잠온다    | 맴맴맴    | 2024-03-28 07:55:37 |      2 | 2024-03-28 08:03:31 |
+|  3 | 피곤타    | 꿀꿀꿀    | 2024-03-28 07:55:48 |      3 | 2024-03-28 08:01:49 |
+|  4 | 피곤타    | 왱왱왱    | 2024-03-28 07:55:56 |      1 | 2024-03-28 08:01:49 |
+|  5 | 잠온다    | 곽곽곽    | 2024-03-28 08:07:39 |      2 | 2024-03-28 08:07:39 |
++----+-----------+-----------+---------------------+--------+---------------------+
+5 rows in set (0.000 sec)
+```
+
+---
+
+## :six: 테이블에 FK 칼럼 추가
+
+- MUL : 중복가능하다는 표시.
+
+```
+MariaDB [board]> alter table post
+    -> add foreign key(userId)
+    -> references user(id);
+Query OK, 5 rows affected (0.034 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [board]> desc post;
++------------+---------------+------+-----+---------------------+-------------------------------+
+| Field      | Type          | Null | Key | Default             | Extra                         |
++------------+---------------+------+-----+---------------------+-------------------------------+
+| id         | int(11)       | NO   | PRI | NULL                | auto_increment                |
+| title      | varchar(100)  | NO   |     | NULL                |                               |
+| subscribe  | varchar(2000) | NO   |     | NULL                |                               |
+| created_at | timestamp     | YES  |     | current_timestamp() |                               |
+| userId     | int(11)       | NO   | MUL | NULL                |                               |
+| updated_at | datetime      | YES  |     | current_timestamp() | on update current_timestamp() |
++------------+---------------+------+-----+---------------------+-------------------------------+
+6 rows in set (0.011 sec)
+```
