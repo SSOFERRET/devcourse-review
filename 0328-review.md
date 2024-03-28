@@ -76,6 +76,8 @@ MariaDB [board]> select * from user;
 3 rows in set (0.000 sec)
 ```
 
+---
+
 ## :three: timestamp
 
 - date
@@ -96,6 +98,8 @@ MariaDB [board]> select * from user;
     - 시스템 시간대 정보에 맞게 일시를 저장한다.
 
 cf. UTC : 한국 시간 - 9;
+
+---
 
 ## :four: default
 
