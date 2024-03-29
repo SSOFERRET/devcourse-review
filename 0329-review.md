@@ -114,8 +114,8 @@ select @@global.time_zone, @@session.time_zone;
 ```
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
-    password: 'root',
+    user: '----',
+    password: '****',
     database: 'Blog',
     dateStrings : true
 })
