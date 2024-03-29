@@ -262,3 +262,4 @@ MariaDB [board]> select post.id, title, subscribe, created_at, updated_at, name,
 5 rows in set (0.000 sec)
 ```
 
+----
