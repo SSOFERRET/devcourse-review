@@ -28,6 +28,8 @@ router.use(express.json());
 ```
 route 파일에 mariadb 모듈 파일을 연결해주었다.
 
+---
+
 ## :two: 회원 정보 조회
 ```
 router
@@ -121,6 +123,8 @@ router
 ```
 body로 가입자 정보를 받아, 일단 먼저 db에 중복되는 이메일 정보가 있는지 확인하기 위해 select query를 보냈다.
 없음을 확인한 후, insert query를 전송하여 회원가입을 했다. insert query에 대한 결과값을 따로 보내주진 않지만 workbench로 확인하면 테이블에 추가되어있음을 확인할 수 있다. 
+
+---
 
 ## :five: 로그인
 
