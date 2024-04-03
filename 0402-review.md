@@ -15,8 +15,8 @@ const {body, param, validationResult} = require('express-validator');
 //함수 파라메터 앞에 유효성 검사 메소드 입력 가능 
 .post(
     [
-        body('userId').notEmpty.isInt().withMessage('숫자 입력하자'),
-        body('name').notEmpty.isString().withMessage('문자 입력하자')
+        body('userId').notEmpty().isInt().withMessage('숫자 입력하자'),
+        body('name').notEmpty().isString().withMessage('문자 입력하자')
     ],
     (req, res) => {
         const err = validationResult(req);
@@ -38,3 +38,7 @@ const {body, param, validationResult} = require('express-validator');
 )
 
 ```
+
+## :two: 파일 내부에 미들웨어 만들기
+
+function() 형태의 함수가 아니라 화살표 함수 사용하면 미들웨어로 사용할 수 있다!
