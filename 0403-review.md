@@ -100,6 +100,10 @@ link : jwt.io
 npm i jsonwebtoken
 ```
 
+![0403](https://github.com/SSOFERRET/devcourse-review/assets/148465774/635c46f1-f3f5-4239-b5cf-fc75687c01e3)
+
+
+
 ### 🗒 JWT 라이브러리 사용해보기
 
 ```
