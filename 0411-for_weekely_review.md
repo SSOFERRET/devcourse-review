@@ -32,7 +32,7 @@
 - salting : 실제 암호의 앞이나 뒤에 랜덤하게 만들어진 솔트 데이터를 덧붙여 해시값을 만든다.
 - key stretching : 해시 암호화를 여러차례 반복하는 것(pbkdf2()의 iterations 매개변수).
 - pbkdf2() : crypto에서 제공하는 암호화 함수. 솔팅을 적용하고 키 스트레칭 횟수의 지정하는 것이 가능하다. 미국표준기술에서 승인된 알고리즘이며, 미국 정부 시스템에서도 사용되고 있다.
-
+![캡처](https://github.com/SSOFERRET/devcourse-review/assets/148465774/ccce841e-ed4a-4367-9f35-eaa006fe156d)
 ---
 참고자료
 
