@@ -38,7 +38,7 @@ query()
 
 ---
 
-## :two: async & await
+## :two: Promise
 
 ### 🗒 Promise 객체
 
@@ -46,7 +46,8 @@ Promise는 객체다.
 
 ```javascript
 let promise = new Promise(function(resolve, reject) { //Promise()는 매개변수로 함수를 받는다. resolve와 reject도 콜백함수이다.
-  // executor : Promise가 실행할 할 일. 성공할 시 결과 값이 resolve 함수에 인가되어 호출되고, 실패할 시 에러 값이 reject 함수에 인가되어 호출된다.
+  // executor : Promise가 실행할 할 일.
+  // executor 성공할 시 결과 값이 resolve 함수에 인가되어 호출되고, 실패할 시 에러 값이 reject 함수에 인가되어 호출된다.
     setTimeout(() => resolve("완료!"), 3000);
   }); 
 
@@ -57,4 +58,31 @@ promise.then(
   function(error){}
 );
 //promise의 then() 메서드의 첫번째 매개변수는 resolve()에, 두번째 매개변수는 reject()에 연결되어 있다.
+```
+
+### 🗒 Promise chaining
+
+Promise가 실행해야하는 일이 여러 개 있을 경우, 일을 순서대로 호출하기 위한 Promise 문법.
+
+```javascript
+let promise = new Promise(function(resolve, reject) {
+    setTimeout(() => resolve("완료!"), 3000);
+  }).then(
+  function(result){
+    console.log(result);
+    return result; // << return으로 result를 다음 then으로 넘겨주어야 한다.
+  },
+  function(error){}
+).then(
+  function(result){
+    console.log(result);
+    return result;
+  },
+  function(error){}
+).then(
+  function(result){
+    console.log(result);
+  },
+  function(error){}
+) ;
 ```
