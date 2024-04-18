@@ -84,5 +84,11 @@ let promise = new Promise(function(resolve, reject) {
     console.log(result);
   },
   function(error){}
-) ;
+);
+
+/**
+* 완료!
+* 완료!
+* 완료!
+*/
 ```
