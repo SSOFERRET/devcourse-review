@@ -92,3 +92,74 @@ let promise = new Promise(function(resolve, reject) {
 * 완료!
 */
 ```
+
+---
+
+## :three: async & await
+
+Promise 객체를 좀 더 쉽고 편하게 사용할 수 있는 문법이다.
+
+### 🗒 async : 무조건 Promise 객체를 반환
+
+```javascript
+async function f() {
+  return 7;
+  // 위의 구문은 아래와 같이 동작한다.
+  // return Promise.resolve(7);
+  // 즉, async 함수는 무조건 Promise 객체를 반환한다. 반환 값이 아니면, Promise.resolve()로 감싼다.
+}
+
+f().then(
+  function(result) {
+    console.log("promise resolve : ", result);
+  },
+  function(error) {
+    console.log("promise reject : ", error);
+  }
+);
+
+// promise resolve : 7
+```
+
+### 🗒 await : async를 좀 더 특별하게
+
+await는 Promise 객체를 기다려주는 함수이다. async 안에서만 사용할 수 있다.
+
+Promise()의 then 메서드의 기능을 함수 안으로 들인 것과 같이 기능한다.
+
+```javascript
+async function f() {
+    let promise = new Promise(function(resolve, reject) {
+        setTimeout(() => resolve("완료"), 3000);
+    });
+    let result = await promise;
+    console.log(result);
+}
+f();
+```
+
+여러 일을 동기적으로 호출하고 싶을 때에는 아래처럼 await를 여러차례 사용해주면 된다.
+
+```javascript
+async function f() {
+  let promise1 = new Promise(function(resolve, reject) {
+    setTimeout(() => resolve("첫번째 쿼리"), 3000);
+  });
+  let result = await promise1;
+  console.log(result);
+
+  let promise2 = new Promise(function(resolve, reject) {
+    setTimeout(() => resolve("두번째 쿼리"), 3000);
+  });
+  result = await promise2;
+  console.log(result);
+
+  let promise3 = new Promise(function(resolve, reject) {
+    setTimeout(() => resolve("세번째 쿼리"), 3000);
+  });
+  result = await promise3;
+  console.log(result);
+}
+
+f();
+```
