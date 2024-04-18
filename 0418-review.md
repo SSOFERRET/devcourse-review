@@ -36,13 +36,49 @@ query()
 - then & catch
 - async & await ← ★
 
+### 🗒 비동기 처리를 위한 콜백 패턴의 단점
+1. 비동기 처리 다음에 또 비동기 처리가 여러 차례 필요하게 된다면 함수 호출이 중첩되어 복잡도가 높아진다 → 콜백 헬
+```javascript
+// 콜백 헬 예시
+step1(function (value1) {
+    step2(function (value2) {
+        step3(function (value3) {
+            step4(function (value4) {
+                step5(function (value5) {
+                    step6(function (value6) {
+                        // Do something with value6
+                    });
+                });
+            });
+        });
+    });
+});
+```
+2. 에러 처리가 곤란하다.
+```javascript
+try {
+  setTimeout(() => {throw new Error('Error');}, 1000);
+} catch (e) {
+  console.error('에러 발생'), e); // 실상 이 코드는 에러를 캐치하지 못한다.
+}
+```
+setTimeout은 비동기 함수이기 때문에 콜백 함수가 호출되는 것을 기다리지 않고 즉시 종료가 된다.
+
+콜백 함수가 실행될 때 setTimeout은 이미 콜 스택에서 제거된 상태인데, 이는 콜백 함수를 호출한 것이 setTimeout 함수가 아니라는 뜻이다.
+
+에러는 호출자 방향으로 전파되는데, setTimeout 함수는 호출자가 아니므로 콜백 함수가 발생시킨 에러는 catch 블록에서 캐치되지 않는다.
+
 ---
 
 ## :two: Promise
 
-### 🗒 Promise 객체
+### 🗒 Promise 객체, 그의 메서드(then, catch, finally)
 
 Promise는 객체다. 
+
+- then 메서드는 두 개의 콜백 함수를 인수로 받는다.
+  - 첫번째 콜백함수는 Promise가 성공하여 resolve 함수가 호출되었을 때 호출된다.
+  - 두번재 콜백함수는 Promise에서 에러가 나 reject 함수가 호출되었을 때 호출된다.
 
 ```javascript
 let promise = new Promise(function(resolve, reject) { //Promise()는 매개변수로 함수를 받는다. resolve와 reject도 콜백함수이다.
@@ -59,6 +95,21 @@ promise.then(
 );
 //promise의 then() 메서드의 첫번째 매개변수는 resolve()에, 두번째 매개변수는 reject()에 연결되어 있다.
 ```
+
+- catch 메서드는 한 개의 콜백 함수를 인수로 받는다. 이 메서드의 콜백 함수는 Promise가 rejected 되었을 때만 호출된다.
+
+```javascript
+let promise = new Promise(function(_, reject) {
+    reject(new Error('Error'));
+  }); 
+
+promise.catch(e => console.log(e)) // Error: Error
+```
+
+- finally 메서드는 한 개의 콜백 함수를 인수로 받는다. 이 메서드의 콜백 함수는 Promise가 성공 여부와 상관 없이 무조건 호출된다.
+
+Promise의 then, catch, finally는 모두 프로미스를 반환한다.
+
 
 ### 🗒 Promise chaining
 
