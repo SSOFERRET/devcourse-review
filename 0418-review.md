@@ -163,3 +163,10 @@ async function f() {
 
 f();
 ```
+
+---
+
+## :four: query 순서대로 실행하기
+
+mysql에서는 query를 Promise 객체로 제공할 수 있다.
+그 방법은 npm의 mysql2 문서로 확인할 수 있다. 
