@@ -61,7 +61,7 @@ npm install --save-dev @faker-js/faker
 
 개발 의존성 설치: 개발할 때만 이 모듈을 사용하겠다! 라는 뜻. '--save-dev'가 그 설정 구문.
 
-### faker 모듈 사용해보기(1)
+### faker 모듈 사용해보기
 
 ```
 const {faker} = require('@faker-js/faker');
