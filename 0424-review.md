@@ -52,3 +52,30 @@ json 전송 단계에서 프론트엔드에 맞게 camel로 변경해줌이 좋�
 
 - faker.js ← 좀 더 간편함.
 - mockaroo
+
+### faker.js 설치
+
+```
+npm install --save-dev @faker-js/faker
+```
+
+개발 의존성 설치: 개발할 때만 이 모듈을 사용하겠다! 라는 뜻. '--save-dev'가 그 설정 구문.
+
+### faker 모듈 사용해보기(1)
+
+```
+const {faker} = require('@faker-js/faker');
+
+console.log(faker.internet.userName());
+console.log(faker.internet.email());
+console.log(faker.internet.password());
+console.log(faker.animal.dog());
+
+/**
+* Syble62
+* Felipa_Stoltenberg@gmail.com
+* UqEeirnwneUbPEd
+* Picardy Spaniel
+* 랜덤으로 뽑혀나온 정보이다!
+*/
+```
