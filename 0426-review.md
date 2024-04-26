@@ -73,3 +73,6 @@ int main()
     return 0;
 }
 ```
+
+![9](https://github.com/SSOFERRET/devcourse-review/assets/148465774/79d24c2e-d106-475d-a38b-2d22d7b5bc6c)
+
