@@ -1,4 +1,4 @@
-:one: break & continue
+## :one: break & continue
 
 1. break: 반복문을 중간에 빠져나가게끔 하는 구문.
 2. continue: skip하고 다시 반복문의 반복 조건으로 올라간다.
@@ -20,7 +20,7 @@ void main()
 
 ---
 
-:two: 함수
+## :two: 함수
 
 - input에 따른 output이 나오는 상자
 - 코드에서 함수를 사용하는 목적
@@ -96,7 +96,7 @@ void main()
 
 ---
 
-:three: 변수의 범위
+## :three: 변수의 범위
 
 - 지역 변수
   - 지역 변수는 스택 메모리에 쌓인다.(FILO)
@@ -177,7 +177,7 @@ void main()
 
 ---
 
-:four: 배열
+## :four: 배열
 
 - 같은 용도, 같은 타입의 수많은 변수를 한꺼번에 만들기 위해 사용한다.
 - 배열의 선언 구조
