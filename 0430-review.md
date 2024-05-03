@@ -3,7 +3,7 @@
 1. break: 반복문을 중간에 빠져나가게끔 하는 구문.
 2. continue: skip하고 다시 반복문의 반복 조건으로 올라간다.
 
-❔ **평가 문제** 구구단을 출력하되, 짝수단(2단, 4단, 6단, 8단)만 출력하는 프로그램을 작성하라. 단, continue문을 사용하여 작성할 것.
+❔ **평가 문제 >>** 구구단을 출력하되, 짝수단(2단, 4단, 6단, 8단)만 출력하는 프로그램을 작성하라. 단, continue문을 사용하여 작성할 것.
 ```c
 #include <stdio.h>
 
@@ -36,7 +36,7 @@ void main()
 ```
 - void 타입: 결과값을 리턴하지 않는 함수.
 
-❔ **평가 문제** 사각형의 넓이를 구하는 함수를 작성해보자. 그리고 이 함수를 main에서 호출하여 출력해보자. 
+❔ **평가 문제 >>** 사각형의 넓이를 구하는 함수를 작성해보자. 그리고 이 함수를 main에서 호출하여 출력해보자. 
 ```c
 int square(int width, int height) {
   return width*height;
@@ -47,7 +47,7 @@ void main() {
 }
 ```
 
-❔ **평가 문제** 사용자로부터 두 수를 입력 받아 두 수를 비교하여 최대값과 최소값을 구하는 함수를 정의하라. 그리고 이 함수를 호출하여 결과값을 출력하도록 하라.
+❔ **평가 문제 >>** 사용자로부터 두 수를 입력 받아 두 수를 비교하여 최대값과 최소값을 구하는 함수를 정의하라. 그리고 이 함수를 호출하여 결과값을 출력하도록 하라.
 ```c
 #include <stdio.h>
 
@@ -70,7 +70,7 @@ void main()
 }
 ```
 
-❔ **평가 문제** 커피 자판기가 있다. 100원을 넣으면 블랙커피, 200원을 넣으면 밀크커피가 나온다. 자판기를 함수로 구현해보자.
+❔ **평가 문제 >>** 커피 자판기가 있다. 100원을 넣으면 블랙커피, 200원을 넣으면 밀크커피가 나온다. 자판기를 함수로 구현해보자.
 ```c
 #include <stdio.h>
 
@@ -93,5 +93,84 @@ void main()
     getCoffee(150);
 }
 ```
+
 ---
 
+:three: 변수의 범위
+
+- 지역 변수
+  - 지역 변수는 스택 메모리에 쌓인다.(FILO)
+  - 변수 이름은 같아도 다른 영역에 속한 변수는 독립된 다른 변수이다.
+  - 지역 변수는 속한 함수의 수명이 끝날 때 소멸된다.
+  - 함수 호출 순서와 소멸 순서는 반대이다.
+- 전역 변수
+  - 어디서든 접근할 수 있는 변수.
+  - 전역 변수는 프로그램이 종료될 때 소멸된다.
+  - 데이터 영역에 저장된다.
+- static 변수
+  - 지역 변수처럼 중괄호 영역에서 선언되지만, 중괄호를 벗어나도 메모리 상에 고정되어 소멸하지 않는다.
+  - 함수 호출 시 생성되고 프로그램 끝날 때 소멸된다.
+
+❔ **평가 문제 >>**  내가 읽은 책들의 페이지 수를 누적 게산하는 기능을 가진 책읽기 마라톤 기능을 가진 프로그램 구현을 한다. 함수로 구현하되, 페이지의 누적 결과를 저장하는 변수를 전역 변수로도 구현하고, statkc 변수로도 구현해보도록 한다.
+```
+//전역 변수
+#include <stdio.h>
+
+int totalPages = 0;
+
+int getTotalPages(int pages) {
+    totalPages += pages;
+    return totalPages;
+}
+
+void printPages() {
+    int todayPages;
+    
+    
+    printf("읽은 책의 페이지 수를 입력하시오: ");
+    scanf("%d", &todayPages);
+    
+    if (todayPages == -1) 
+        printf("더 분발하세요.");
+    else {
+        printf("최종 누적 페이지: %d\n", getTotalPages(todayPages));
+        printPages();
+    }
+}
+
+void main()
+{   
+    printPages();
+}
+```
+
+```
+//static 변수
+#include <stdio.h>
+
+int getTotalPages(int pages) {
+    static int totalPages = 0;
+    totalPages += pages;
+    return totalPages;
+}
+
+void printPages() {
+    int todayPages;
+    
+    
+    printf("읽은 책의 페이지 수를 입력하시오: ");
+    scanf("%d", &todayPages);
+    
+    if (todayPages == -1) 
+        printf("더 분발하세요.");
+    else {
+        printf("최종 누적 페이지: %d\n", getTotalPages(todayPages));
+        printPages();
+    }
+}
+
+void main()
+{   
+    printPages();
+}
+```
