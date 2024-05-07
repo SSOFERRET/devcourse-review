@@ -239,12 +239,15 @@ int main()
     printf("b = %d\n", b);
     printf("&b = %p\n", &b);
     printf("pB = %p\n", pB);
+    printf("*pB = %d\n", *pB);
     
     return 0;
 }
+
 /**
 * b = 100
 * &b = 0x7ffc6d94d50c
 * pB = 0x7ffc6d94d50c
+* *pB = 100
 */
 ```
