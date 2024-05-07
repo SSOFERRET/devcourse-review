@@ -251,3 +251,97 @@ int main()
 * *pB = 100
 */
 ```
+
+---
+
+## :six: 포인터와 배열
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    int arr[] = {1,2,3,4,5};
+    
+    for(int i = 0; i < 5; i++) {
+        printf("%d\n", arr[i]);
+        printf("%p\n", &arr[i]);
+    }
+    
+    printf("배열의 이름: %p\n", arr);
+    
+    return 0;
+}
+
+/**
+1
+0x7fffaaa07cf0
+2
+0x7fffaaa07cf4
+3
+0x7fffaaa07cf8
+4
+0x7fffaaa07cfc
+5
+0x7fffaaa07d00
+배열의 이름: 0x7fffaaa07cf0
+*/
+```
+
+- 배열의 이름은 포인터이다!
+- 배열의 이름은 주소값을 갖는 포인터이지만 상수이므로, 포인터 상수라 부른다. 따라서 주소값을 변경할 수 없다.
+
+---
+
+## :seven: 함수와 포인터
+
+- 기본적인 함수의 인자 전달 형태: 복사(실인수 → 형식인수. 메모리를 공유하는 것이 아니다!)
+- 배열형의 인자는 포인터형으로 받는다: 참조에 의한 복사(call by reference)
+
+```c
+#include <stdio.h>
+
+void func(int *pArr){
+    for(int i = 0; i < 5; i++) {
+        printf("함수 안의 배열: %d\n", *(pArr + i));
+    }
+}
+
+int main()
+{
+    int arr[] = {1,2,3,4,5};
+    
+    func(arr);
+    
+    for(int i = 0; i < 5; i++){
+        printf("%d\n", arr[i]);
+        printf("%p\n", &arr[i]);
+    }
+    
+    printf("배열의 이름: %p\n", arr);
+    
+    return 0;
+}
+
+/**
+함수 안의 배열: 1
+함수 안의 배열: 2
+함수 안의 배열: 3
+함수 안의 배열: 4
+함수 안의 배열: 5
+1
+0x7ffd96d12fb0
+2
+0x7ffd96d12fb4
+3
+0x7ffd96d12fb8
+4
+0x7ffd96d12fbc
+5
+0x7ffd96d12fc0
+배열의 이름: 0x7ffd96d12fb0
+*/
+```
+
+- 메모리 절감 가능!
+- 자바스크립터에서는 포인터를 직접 언급하지는 않으나, 배열 인가 및 복사는 참조에 의한 복사 방식을 채택하고 있다.
