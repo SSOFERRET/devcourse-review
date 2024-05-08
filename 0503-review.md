@@ -111,3 +111,44 @@ class MakeDog {
 //멍멍
 //푸들 눈: 2
 ```
+
+---
+
+## :four: 다형성
+
+- 함수의 이름이 같더라도 전달인자의 타입이나 개수에 따라 구분된다.
+- 오버로딩
+  - 가적하다. 적재하다.
+  - 이름이 같은 함수일지라도 전달인자 타입이나 개수가 다른 경우 다른 함수로 인식하여 동작한다.
+  - 스타크래프트 저글링의 오버로드
+```c#
+using System;
+
+public class Zerg{
+    public void Overload(int zerggling){
+        Console.WriteLine("저글링 {0} 마리", zerggling);
+    }
+    public void Overload(int zerggling, int hydra){
+        Console.WriteLine("저글링 {0} 마리 + 히드라 {1}마리", zerggling, hydra);
+    }
+    public void Overload(int zerggling, int hydra, int lurker){
+        Console.WriteLine("저글링 {0} 마리 + 히드라 {1}마리 + 럴커 {2}마리", zerggling, hydra, lurker);
+    }
+}
+
+class HelloWorld {
+  static void Main() {
+    Zerg zerg = new Zerg();
+    zerg.Overload(10);
+    zerg.Overload(5, 5);
+    zerg.Overload(5, 6, 7);
+  }
+}
+
+/**
+저글링 10 마리
+저글링 5 마리 + 히드라 5마리
+저글링 5 마리 + 히드라 6마리 + 럴커 7마리
+*/
+```
+- 오버라이딩
