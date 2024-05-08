@@ -59,7 +59,7 @@ function Plus(a : number, b : number) :number {
 ## :five: 인터페이스
 
 - 데이터 타입 묶음을 만들어주어 코드를 깔끔하게 하기 위해 사용한다.
-```
+```typescript
 interface Student {
   stdId : number;
   stdName : string;
@@ -103,7 +103,7 @@ setInfo({
 - 입력 값에 제한을 두기 위해 사용한다. enum과 사용 이유가 비슷하다.
 - 사용자 정의 타입이다.
 
-```
+```typescript
 enum GenderType { 
   Male = 1,
   Female = 2,
