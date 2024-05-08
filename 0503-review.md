@@ -117,7 +117,8 @@ class MakeDog {
 ## :four: 다형성
 
 - 함수의 이름이 같더라도 전달인자의 타입이나 개수에 따라 구분된다.
-- 오버로딩
+
+### :memo: 오버로딩
   - 가적하다. 적재하다.
   - 이름이 같은 함수일지라도 전달인자 타입이나 개수가 다른 경우 다른 함수로 인식하여 동작한다.
   - 스타크래프트 저글링의 오버로드
@@ -151,4 +152,36 @@ class HelloWorld {
 저글링 5 마리 + 히드라 6마리 + 럴커 7마리
 */
 ```
-- 오버라이딩
+
+### :memo: 오버라이딩
+
+- 올라탄다. 엎어친다. 기존의 것을 덮어쓴다.
+- 상속 받은 속성을 자식클래스가 덮어씌우기를 한다.
+- 
+```c#
+using System;
+
+class Dog{
+    protected int eyes, nose, mouse, ears;
+    public virtual void bark(){ // ← 기존 속성
+        Console.WriteLine("멍멍");
+    }
+    public Dog() { // constructor. 클래스명과 동일한 함수로 선언해주면된다.
+        eyes = 0;
+        nose = 0;
+        mouse = 0;
+        ears = 0;
+    }
+}
+
+class Poodle : Dog{
+    public Poodle(){
+        base.eyes = 2;
+        Console.WriteLine("푸들 눈: {0}", eyes);
+    }
+    
+    public override void bark(){ // ← 오버라이딩
+        Console.WriteLine("왈왈");
+    }
+}
+```
