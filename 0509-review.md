@@ -36,7 +36,7 @@ npm start
 - 자바스크립트의 확장 문법.
 - HTML 문법을 JavaScript 코드 내부에 쓴 것이다.
 
-```react
+```javascript
 function App() {
   let name = "리액트";
   let port = undefined;
