@@ -27,6 +27,8 @@ ex. Node.js, 리액트, Bootstrap 등
 
 ## :two: OSI
 
+Open Source Instiative. 오픈소스 관리하는 비영리 법인.
+
 ### :memo: 오픈 라이선스 종류
 - GPL
   : GNU에서 만들었다.
@@ -50,3 +52,7 @@ ex. Node.js, 리액트, Bootstrap 등
 라이선스 주요 내용 중에서도 배포 관련 내용에 주의하는 것이 좋다!
 
 ---
+
+🍪 beerware
+
+- 제약 조건이 없거나 매우 낮은 소프트웨어 사용권. 귀야움.
