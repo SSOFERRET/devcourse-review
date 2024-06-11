@@ -40,7 +40,7 @@ tsconfig.json
 2. 반복적으로 들어가야하는 헤더, 푸터 등을 매 화면마다 제공한다.
 3. 상황과 필요에 따라 레이아웃이 변경될 수 있도록 대비한다.
 ---
-picocss
+#### pico.css
 public >index.html에 
     <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 
