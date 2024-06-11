@@ -60,7 +60,7 @@ props
 - normalize.css
 - sanitize.css
 --- 
-스타일드 컴포넌트
+#### styled component
 - css-in-js는 왜 필요할가 => 관심사의 분리를 위함
  - 전역 충돌
  - 의존성 관리 어려움
