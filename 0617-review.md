@@ -92,5 +92,119 @@ https://kubernetes.io/docs/concepts/overview/components/
 - On-prem 설치
   - SUSE의 Rancher
   - ReadHat의 OpenShift
-   
-  
+
+---
+
+## 쿠버네티스 기본 사용법
+
+- k8s 클러스터에 어떤 것을 지시할 수 있는 가
+  - 포드의 생성과 컨테이너의 실행
+  - 디플로이먼트를 이용하여 동일한 기능을 하는 포드의 레플리카셋을 실행
+  - 클러스터 외부로부터의 접근이 가능하도록 서비스를 실행
+  - 생성된 k8s오브젝트들을 삭제
+- k8s 클러스터의 현재 상태를 조회하는 방법을 알아본다.
+- 오브젝트 스펙을 작성하는 기초를 익히고 실습해본다.
+
+### 노드와 포드의 정보를 조회하는 법
+
+```
+kubectl get nodes
+kubectl get pods
+```
+
+![17-1](https://github.com/SSOFERRET/devcourse-review/assets/148465774/d51d407f-f49c-416f-b8b7-1e16425edcef)
+
+```
+kubectl get nodes -o wide
+```
+'-o wide' 옵션을 추가하면 아래 정보가 더 나온다
+
+![17-2](https://github.com/SSOFERRET/devcourse-review/assets/148465774/c0d1dcba-5493-43a8-87dd-630f609f5b84)
+
+```
+kubectl get pods --all-namespaces
+```
+
+![17-3](https://github.com/SSOFERRET/devcourse-review/assets/148465774/0b97a1ed-2d42-45d4-be8d-63b75e52af7a)
+
+옵션 없이 CLI를 입력했을 때엔 default namespace에 포드가 존재하지 않는다고 떴지만, --all-namespaces 옵션을 붙이니 kube-system namespace의 포드가 존재함을 알 수 있다.
+
+### 포드 생성
+
+```
+kubectl run nginx-pod --image=nginx
+//nginx-pod는 포드 이름이다.
+```
+
+### 쿠버네티스 디플로이먼트
+
+- Deployment
+  - 응용의 배포를 위해 많이 이용되는 k8s의 오브젝트 형태
+  - 동일한 모습의 포드들의 복제본 모음인 replicaset을 이용하는 것이 일반적이다.
+  - 단순한 레플리카셋에 비하여 동적 업데이트 및 롤백, 배포 버전 관리등이 유연하여 응용의 배포에 널리 이용됨.
+  - 보통은 상태가 없는 stateless 응용의 배포에 이용
+    - 포드는 언제라도 사멸할 수 있음을 기억하라
+- 동작 방식
+  - 디플로이먼트의 상태를 선언하면 k8s가 동적으로 의도된 상태가 되도록 레플리카셋을 관리한다.
+
+```
+// 디플로이먼트 생성
+kubectl create deployment dpy-nginx --image=nginx
+
+// 디플로이먼트 조회
+kubectl get deployment
+
+// 디플로이먼트 상세 조회
+kubectl describe deployment dpy-nginx
+```
+
+```
+// 포드 복제
+kubectl scale deployment dpy-nginx --replicas=3
+```
+
+### 클러스터 바깥으로 응용을 노출해보자
+
+- k8s 서비스: 클러스터 내부의 포드에 의하여 실행되는 응용을 외부에 접근 가능하도록 노출하는 기능을 하는 오브젝트
+- 노출하는 대상: 특정 포터에서 실행하는 컨테이너의 특정 포트
+
+- NodePort 형태의 실습
+```
+kubectl expose pod nginx-pod --type=NodePort --name=pod-svc --port=80
+```
+nginx-pod의 80번 포트를 모든 노드의 특정 포트로 노출
+
+```
+kubectl get svc
+```
+![17-4](https://github.com/SSOFERRET/devcourse-review/assets/148465774/90da599b-6415-44e3-9abe-81b19b0abe95)
+
+![image](https://github.com/SSOFERRET/devcourse-review/assets/148465774/0218e9e3-171e-43ca-a347-21387383f9d2)
+
+### 오브젝트 삭제
+
+```
+kubectl delete service pod-svc
+```
+
+복제된 오브젝트를 삭제하면 다음과 같은 일이 생긴다
+![image](https://github.com/SSOFERRET/devcourse-review/assets/148465774/5ae10bec-b8a2-461c-81d7-cf00e65d790c)
+
+- 디플로이먼트 개수를 3개로 설정했기 때문에, 쿠버네티스는 그 개수를 유지하고자한다.
+- 디플로이먼트 자체를 삭제하면 그에 할당된 포드도 한꺼번에 삭제된다.
+
+### 매니페스트
+
+- k8s 오브젝트에 대한 명세를 파일로 기록한 것.
+  - YAML 의 형태를 이용
+- 파일에 각 오브젝트에 의도하는 상태를 기술
+  - 이것을 오브젝트 스펙이라고 부름
+- 이 파일을 이용하여
+  - 오브젝트를 생성할 수 있음
+  - 오브젝트의 상태를 변경할 수 있음
+- 자동화가 필요한 환경에서 명령어 라인에 일일이 입력하는 것보다 많이 이용됨
+
+```
+kubectl apply -f
+// kubectl create -f 와의 차이
+```
