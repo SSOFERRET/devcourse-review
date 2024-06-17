@@ -208,3 +208,82 @@ kubectl delete service pod-svc
 kubectl apply -f
 // kubectl create -f 와의 차이
 ```
+
+---
+
+## 쿠버네티스를 이용한 서비스 운용
+
+- 매니페스트를 이용하여 디플로이먼트 생성
+
+```python
+// app.py
+from flask import Flask
+import socket
+
+app = Flask(__name__)
+
+hostname = socket.gethostname()
+ipv4 = socket.gethostbyname(hostname)
+
+message = f'<p>Hostname: {hostname}</p><p>IPv4 Address: {ipv4}</p>\n'
+
+@app.route("/")
+def root():
+    return message
+```
+
+```yaml
+// deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: dpy-hname
+  labels:
+    app: hostname
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hostname
+  template:
+    metadata:
+      labels:
+        app: hostname
+    spec:
+      containers:
+      - name: hname
+        image: {-}/hostname:latest //{-} 위치에 실제 docker hub 이름을 기입한다.
+        ports:
+        - containerPort: 80
+```
+
+```yaml
+// service.yaml
+apiVersion: v1
+kind: Service
+
+metadata:
+    name: svc-hname
+spec:
+    type: NodePort
+    selector:
+        app: hostname
+    ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000
+```
+
+위의 파일들을 이미지 파일과 같은 디렉토리에 묶고 다음 CLI를 입력한다.
+
+```cmd
+// cmd prompt
+docker build -t hostname:latest .
+docker tag hostname:latest {-}/hostname:latest
+docker push {-}/hostname:latest
+```
+
+이로써 디플로이먼트와 서비스가 생성되어 동작 상태가 된다.
