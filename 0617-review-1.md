@@ -414,3 +414,32 @@ kubectl apply -f metrics.yaml // 설치
 kubectl top pods
 kubectl top nodes // 상태 확인
 ```
+
+### 응용 (웹 서버) 배포
+
+```
+// hpa 오토스케일 설정
+kubectl autoscale deployment php-apache --cpu-percent=50 --min=1 --max=10
+
+// php-apache에 부하를 주는 코드 동작 실행
+kubectl run -it load-gen --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
+
+// 이후 별개의 명령 프롬프트로 php-apache의 hpa 상태를 관찰할 수 있다
+kubectl get hpa php-apache --watch
+kubectl get hpa
+kubectl get pods
+
+// 부하가 증가하면서 pods 개수도 증가함을 확인할 수 있다.
+```
+
+### 볼륨
+
+- k8s는 클러스터 내에서 이용할 수 있는 저장장치의 추상화된 객체로 볼륨을 정의
+- PV (PersistentVolume)
+  - 클러스터 내에 존재하는 스토리지를 추상화한 것
+  - 클러스터 내의 노드에 존재하는 물리적 저장장치를 이용할 수도 있으며, 다양한 원격 저장소 및 클라우드 서비스들도 이용할 수 있다.
+- PVC (PersistentVolumeClaim)
+  - (사용자에 의한) PV를 이용하기 위한 요청
+  - Pod:Node = PVC:PV
+  - 저장 공간의 크기와 접근 모드 (읽기/쓰기, ...)를 지정
+ 
