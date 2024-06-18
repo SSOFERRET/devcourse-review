@@ -79,3 +79,44 @@
 
 ## 젠킨스 설치
 
+1. helm 설치
+https://may9noy.tistory.com/1113
+```
+// 2. 
+helm repo add jenkinsci https://charts.jenkins.io
+
+// 3.
+helm repo update
+
+// 4.
+helm install jenkins jenkinsci/jenkins
+
+// 5.
+kubectl logs sts/jenkins jenkins
+```
+
+### Jenkins 관리자 비밀번호 알아내기
+
+```
+// 비밀번호 알아내기
+kubectl get secret jenkins -o jsonpath="{.data.jenkins-admin-password}"
+
+// 비밀번호 바꾸기
+kubectl edit secrets jenkins
+// 그러면 관련 파일이 팝업되는데, 사용하고자하는 비밀번호의 base64 인코딩 내용을 복붙한다.
+
+// 젠킨스 접속
+kubectl port-forward svc/jenkins 8080:8080
+// 여기서 로그인하면 된다.
+```
+### Jenkins 기초 설정
+
+- 언어 설정
+  - 사용자 인터페이스에 기본적으로 적용되는 언어설정을 영어로 고정
+    - 메뉴명 등이 달라서 겪을 수 있는 혼란을 피하려는 목적
+  - 플러그인 'Locale'을 설치
+  - Manage Jenkins > System > Locale
+- 시간대 설정
+  - 자신이 살고 있는 지역의 시간대로 서버 시간대를 설정
+    - 빌드 시작 및 종료 시각 등의 기록을 해석하는 데 혼란을 피하려는 목적
+  - People > 계정 선택 > Configure > User Defined Time Zone
