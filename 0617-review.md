@@ -324,3 +324,47 @@ kill -9 20
 
 ## 포드의 업데이트와 복구
 
+- 소프트웨어 업데이트가 발생함에 따라 동적 업데이트가 필요한데, k8s는 어떻게 업데이트를 수행하는가
+- 소프트웨어 업데이트는 실패할 수 있으므로, 빠르고 유연한 복구는 필수 기능이다. 롤백하는 방법은 무엇인가.
+
+```
+//rollout.yaml
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: dpy-nginx
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.16.0
+        ports:
+        - containerPort: 80
+```
+
+```
+kubectl apply -f rollout.yaml
+kubectl get deploy
+kubectl rollout status deployment dpy-nginx // 디플로이먼트 배포 상태를 조회
+kubectl rollout history deployment dpy-nginx // 디플로이먼트 배포 이력을 조회
+```
+
+- kubectl annotate를 적용해보자
+```
+// rollout.yaml로 인해 1.16.0 ver로 설치된 nginx를 1.17.0으로 재설치한다.
+kubectl set image deployment dpy-nginx nginx=nginx:1.17.0
+
+// annotate를 사용하여 변경 사유에 내용을 기입할 수 있다.
+kubectl annotate deployment dpy-nginx kubernetes.io/change-cause="update nginx
+```
