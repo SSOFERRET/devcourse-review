@@ -24,4 +24,6 @@
 
 - 리포지토리에 코드 커밋이 발생할 때마다 빌드, 단위테스트, 정적 분석 등을 행함
 - CI 서버를 Jenkins가 담당함
+![image](https://github.com/SSOFERRET/devcourse-review/assets/148465774/c6c540a4-2c9c-44dc-ab44-78ac86db3ca5)
+
   
