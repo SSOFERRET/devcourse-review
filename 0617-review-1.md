@@ -397,3 +397,20 @@ kubectl annotate deployment dpy-nginx kubernetes.io/change-cause="update nginx
     - 보통의 경우, 고려되는 부하량: CPU 및 메모리 사용량
   - 메트릭스 서버로부터 부하 계측값을 전달받아 동일한 기능을 제공하는 포드의 수를 동적으로 조절
   - 스케일링 기준이 되는 값과 최소/최대 포드의 수를 지정
+
+### 메트릭스 서버의 설치
+
+- 참고로 한 원본 파일
+<br />
+  https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+- 이 파일에서 TLS 인증을 무시하도록 설정
+  ```
+  // 136 line에 아래 문구를 추가
+  - --kubelet-insecure-tls
+  ```
+  
+```
+kubectl apply -f metrics.yaml // 설치
+kubectl top pods
+kubectl top nodes // 상태 확인
+```
