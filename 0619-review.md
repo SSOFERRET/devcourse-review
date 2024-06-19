@@ -48,6 +48,8 @@
 
 ## Jenkins 파이프라인에서의 인수 테스트
 
+![image](https://github.com/SSOFERRET/devcourse-review/assets/148465774/0e5334f3-d7de-4be5-a587-e801c7fc4032)
+
 - 개발자가 변경한 코드를 GitHub에 푸시
 - Jenkins가 변경을 감지하고 코드를 인출해 빌드를 시작, 코드를 점검(단위테스트 수행)
 - Jenkins가 빌드를 완료하여 도커 이미지를 생성
