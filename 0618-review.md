@@ -15,5 +15,14 @@ https://git-scm.com/book/ko/v2/Git-%EC%84%9C%EB%B2%84-SSH-%EA%B3%B5%EA%B0%9C%ED%
 
 ### Spring Boot 프로젝트 생성
 
-start.spring.io
+https://start.spring.io
 
+이것을 사용하려면 java 도 깔려있어야한다. 
+
+https://www.oracle.com/kr/java/technologies/downloads/#java17
+
+- credential 설정
+
+![image](https://github.com/SSOFERRET/devcourse-review/assets/148465774/545219f9-332d-49d9-960f-6f03c0d22e24)
+
+- pipeline stage view plugin install 
