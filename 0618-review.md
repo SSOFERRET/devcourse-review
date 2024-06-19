@@ -12,3 +12,8 @@
 
 아래 페이지를 참고하여 ssh 키 생성 후 깃허브 계정 설정에 세팅하면 된다.<br />
 https://git-scm.com/book/ko/v2/Git-%EC%84%9C%EB%B2%84-SSH-%EA%B3%B5%EA%B0%9C%ED%82%A4-%EB%A7%8C%EB%93%A4%EA%B8%B0
+
+### Spring Boot 프로젝트 생성
+
+start.spring.io
+
