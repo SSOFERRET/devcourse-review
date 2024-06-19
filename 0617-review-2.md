@@ -120,3 +120,69 @@ kubectl port-forward svc/jenkins 8080:8080
   - 자신이 살고 있는 지역의 시간대로 서버 시간대를 설정
     - 빌드 시작 및 종료 시각 등의 기록을 해석하는 데 혼란을 피하려는 목적
   - People > 계정 선택 > Configure > User Defined Time Zone
+ 
+---
+
+## 젠킨스 기본 사용법
+
+- Hello, world!를 콘솔에 찍는 작업을 할 때 벌어지는 일
+  - Jenkins 마스터는 k8s 클러스터 내에 동적으로 에이전트를 생성
+  - 에이전트에서는 지정한 작업을 수행
+  - 에이전트의 작업 수행 결과는 마스터에게 보고
+
+### 사용법
+
+- 젠킨스 페이지에서 New Item 추가
+- 이름 기재하고 pipeline 선택
+- 들어온 페이지의 Pipeline 란에 아래 코드 기재
+```
+  pipeline {
+    agent any
+    stages {
+        stage("Hello") {
+            steps {
+                echo 'Hello, world!'
+            }
+        }
+    }
+}
+```
+- 저장하고 지금 빌드를 클릭한다.
+
+### 클러스터 내 에이전트 동작 관찰
+
+- k8s 클러스터에서 Jenkins는 에이전트를 동적으로 프로비저닝
+  - Kubernetes 플러그인이 설치되어 있어야하며, 적절한 설정도 되어 있어야함.
+
+---
+
+## 젠킨스 프로젝트 설정
+
+- 프로젝트 소스가 담긴 GitHub 리포지토리 준비
+- 젠킨스의 빌드 환경을 설정
+- Docker를 이용하여 이미지를 빌드하고 DockerHub 레지스트리에 푸시
+- kubectl을 이용하여 레지스트리로부터 이미지를 가져다가 같은 클러스터에 배포
+
+### 과정
+
+- new item에서 freestyle 설정해서 생성
+- Build Step 항목에 아래처럼 적는다
+![image](https://github.com/SSOFERRET/devcourse-review/assets/148465774/06b4aefa-27d8-4fc4-8a99-0d640bf7475c)
+
+위는 Fail하는데, 설정된 docker image에 docker CLI가 내포되어있지 않기 때문이다.
+따라서, 이를 내포한 이미지로 설정된 에이전트를 따로 생성할 필요가 있다.
+
+### 컨테이너 스펙을 작성해서 포드 템플릿의 설정을 완성
+
+- 신규 추가하는 포드 템플릿에는 두 개의 컨테이너 스펙이 포함되도록 할 예정
+  - 빌드 작업을 실행할 컨테이너(jnlp)
+    - JNLP(Java Network Launch Protocol)을 따라 Jenkins 마스터와 작업 조율하면서 빌드 작업 실행
+    - docker CLI와 kubectl CLI 를 갖추고 있다.
+    - 미리 만들어진 이미지 이용
+  - 도커 데몬을 실행하는 컨테이너 (dind)
+    - 어느 클러스터에 있더라도 통일된 docker build 환경을 제공하기 위해 독립된 컨테이너로 제공
+    - 이미지는 docker:latest 이용
+   
+  ![image](https://github.com/SSOFERRET/devcourse-review/assets/148465774/10ae3771-c21e-49fc-add3-60ef8a5739e5)
+
+  ![image](https://github.com/SSOFERRET/devcourse-review/assets/148465774/d9143b0c-61f1-481b-ba23-caf7ff397383)
