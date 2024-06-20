@@ -53,7 +53,7 @@ resource "docker_image" "nginx" {
 
 resource "docker_container" "nginx" {
   image = docker_image.nginx.image_id
-  name  = var.container_name
+  name  = "sample"
 // 이것을 이용한 컨테이너를 인프라로 생성 (포트 80을 열어 8000 포트로 노출)
   ports {
     internal = 80
