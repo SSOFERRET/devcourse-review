@@ -33,6 +33,8 @@
 
 - 적당한 위치에 빈 디렉토리를 만들고, 아래와 같은 내용을 main.tf 파일로 작성
 ```
+//main.tf
+
 terraform {
   required_providers {
     docker = {
@@ -60,4 +62,60 @@ resource "docker_container" "nginx" {
     external = 8000
   }
 }
+```
+
+##### 테라폼 명령어
+
+```
+terrafrom validate
+terraform fmt // 파일의 형태를 통일하는 명령어
+terraform apply // 생성. 플랜 단계로 넘어감.
+```
+
+#### 변수를 이용한 인프라 구성
+
+```
+// main.tf 수정
+
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "~> 3.0.1"
+    }
+  }
+}
+
+provider "docker" {}
+
+resource "docker_image" "nginx" {
+  name         = "nginx"
+  keep_locally = false
+}
+
+resource "docker_container" "nginx" {
+  image = docker_image.nginx.image_id
+  name  = var.container_name
+
+  ports {
+    internal = 80
+    external = 8000
+  }
+}
+```
+
+```
+// variables.tf
+
+variable "container_name" {
+  description = "Value of the name for the Docker container"
+  type        = string
+  default     = "ExampleNginxContainer"
+}
+```
+
+##### 테라폼 명령어2
+
+```
+terraform apply --auto-approve -var "container_name=YetAnotherName" // 컨테이너명에 변수 설정
 ```
