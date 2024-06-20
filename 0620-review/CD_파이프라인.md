@@ -161,3 +161,21 @@ output "image_id" {
   - 웹 화면으로 redirect 되고, 여기서 토큰 생성
   - 이 토큰을 입력하여 로그인 완료
   - 토큰은 비밀로 관리하고 잘 저장해 둘 것
+ 
+---
+
+### CD 파이프라인 설계
+
+- 지금까지 개발한 CI 파이프라인의 상태
+  - Code checkout → Build & test → Packaging & Registry push
+  - Staging과 Acceptance test는 임시 상태
+- CD 파이프라인 완성을 위해 남아 있는 일들
+  - 스테이징 환경과 프로덕션 환경 구성 (Terraform IaC를 이용)
+  - Acceptance test 와 smoke test 단계를 설정
+  - 추가로 고려할 것: 빌드 버전 관리
+
+#### 프로덕션 vs 스테이징
+
+- 스테이징 환경은 프로덕션 환경을 가능한 한 그대로 모사하도록 설계되어야 함
+  - (가상화된) 인프라의 논리적 구성뿐만 아니라 컴퓨팅 리소스의 물리적/지리적 배치 등도 고려
+  
