@@ -70,7 +70,10 @@ resource "docker_container" "nginx" {
 terrafrom validate
 terraform fmt // 파일의 형태를 통일하는 명령어
 terraform apply // 생성. 플랜 단계로 넘어감.
+terraform destroy // 삭제
 ```
+
+---
 
 #### 변수를 이용한 인프라 구성
 
@@ -118,4 +121,22 @@ variable "container_name" {
 
 ```
 terraform apply --auto-approve -var "container_name=YetAnotherName" // 컨테이너명에 변수 설정
+```
+
+---
+
+#### 출력 포맷 적용하기
+
+```
+//outputs.tf
+
+output "container_id" {
+  description = "ID of the Docker container"
+  value       = docker_container.nginx.id
+}
+
+output "image_id" {
+  description = "ID of the Docker image"
+  value       = docker_image.nginx.id
+}
 ```
