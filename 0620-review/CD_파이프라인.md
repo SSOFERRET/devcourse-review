@@ -140,3 +140,24 @@ output "image_id" {
   value       = docker_image.nginx.id
 }
 ```
+
+---
+
+### Terraform Cloud
+
+- 인프라 상태 정보 유지
+  - SCM에 저장하는 것은 바람직하지 않다
+  - Jenkins agent 는 필요에 따라 생성되고 역할을 다하고 나면 사라지는 k8s 포드에 의해 실행되기 때문에 이 정보를 기록할 수 없다.
+  - k8s persistent volume 을 이용하는 방법도 적합하지 않음
+  - 보통은 이런 것을 저장하기 위한 vault 서비스 이용
+- 설치: https://app.terraform.io
+
+#### Terraform Cloud 설정
+
+- Organization 신규 생성
+  - User Settings > Organization
+- 콘솔 로그인
+  - 명령어: terraform login
+  - 웹 화면으로 redirect 되고, 여기서 토큰 생성
+  - 이 토큰을 입력하여 로그인 완료
+  - 토큰은 비밀로 관리하고 잘 저장해 둘 것
