@@ -10,8 +10,15 @@
   - NPM Command: package.json
     - start: 로컬 개발 서버 실행
     - build: 프로덕션 배포를 위한 Webpack 빌드
+   
+## 패키지 구조
+- Page Components
+- (Smaller) Components
+- API 함수
+- React Query Hooks
+- Utility
 
-## FE 패키지 구조
+### FE 패키지 구조
 
 - 디렉토리: /src
   - index.tsx: 스크립트 진입점 파일
@@ -76,10 +83,5 @@
   - deleteNote
 
 
-## 패키지 구조
-- Page Components
-- (Smaller) Components
-- API 함수
-- React Query Hooks
-- Utility
+
 
