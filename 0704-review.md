@@ -41,7 +41,40 @@
   |Index.tsx|"/notes"|노트 목록 페이지|
   |Detail.tsx|"/notes/{:noteId}"|노트 상세 및 편집 페이지|
 
-....
+- 디렉토리: /src/components
+  |파일명|내용|역할|
+  |:--:|:--:|:--:|
+  |LoginForm.tsx|이메일/패스워드 인풋 및 로그인/회원가입 버튼|로그인을 위한 입력 폼 및 버튼 제공|
+  |JoinForm.tsx|이메일/패스워드/패스워드확인 인풋 및 회원가입 버튼|회원가입을 위한 폼 및 버튼 제공|
+  |NoteList.tsx|사용자가 작성한 노트의 목록|노트를 클릭하여 해당 노트를 상세 조회하거나 편집하는 페이지로 이동|
+  |NoteTitleInput.tsx|노트 제목 인풋|노트 제목을 작성하는 인풋 컴포넌트|
+  |NoteContentEditor.tsx|노트 내용 에디터 인풋|tiptap 라이브러리를 통해 노트 내용을 작성하는 인풋 컴포넌트|
+  
+
+- 디렉토리: /src/components/boundaries
+   |파일명|역할|
+  |:--:|:--:|
+  |AppErrorBoundary.tsx|react-error-boundary 라이브러리를 통해 앱의 오류를 처리하는 컴포넌트|
+  |RouteErrorBoundary.tsx|react-router-dom에서 발생하는 라우팅 에러를 처리하는 컴포넌트|
+
+- 디렉토리: /src/components/hocs
+   |파일명|역할|
+  |:--:|:--:|
+    |withUnauthenticated.tsx|로그인된 상태면 래핑한 컴포넌트를 렌더링하지 않고 노트 목록 URL로 리다이렉트를 시키는 HOC|
+  |withAuthenticatedUser.tsx|로그인하지 않은 상태면 래핑한 컴포넌트를 렌더링하지 않고, 로그인 URL로 리다이렉트시키는 HOC. 로그인 되어있으면 래핑한 컴포넌트의 Props로 User 정보를 내려준다|
+  |withCurrentNote.tsx|현재 URL을 기반으로 노트 정보를 불러오고, 래핑한 컴포넌트의 props로 노트의 정보를 내려준다|
+
+- 디렉토리: /src/apis
+  - fetchCurrentUser
+  - requestLogin
+  - requestLogout
+  - requestJoin
+  - fetchNotes
+  - fetchNote
+  - createNote
+  - updateNote
+  - deleteNote
+
 
 ## 패키지 구조
 - Page Components
