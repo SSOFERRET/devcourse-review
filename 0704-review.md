@@ -82,6 +82,22 @@
   - updateNote
   - deleteNote
 
+- 디렉토리: /src/hooks
+  (React Query를 통해 API 함수를 래핑한 훅을 제공)
+  - useNotes
+  - useNote
+  - useCreateNote
+  - useUpdateNote
+  - useDeleteNote
+  - useCurrentUser
+  - useJoin
+  - useLogin
+  - useLogout
 
+- 디렉토리: /src/utils
+  |파일명|내용|역할|
+  |:--:|:--:|:--:|
+  |http.ts|Axios 클라이언트|REST API의 HTTP 요청을 위한 Axios 클라이언트 인스턴스 제공|
+  |getStatusFromError.ts|number타입을 리턴해주는 함수|주어진 에러 객체에서 Status Code를 추출하여 리턴|
 
 
