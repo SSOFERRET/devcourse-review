@@ -1,5 +1,8 @@
 # FE 구조 설계서와 상세 설계서
 
+![image](https://github.com/SSOFERRET/devcourse-review/assets/148465774/191fe679-1bac-4231-8a6b-d6d625444917)
+
+
 ## 구조 설계서의 개관 사항
 
 - 개요
